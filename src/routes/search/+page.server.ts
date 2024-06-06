@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
 	default: async ({request, fetch}) => {
