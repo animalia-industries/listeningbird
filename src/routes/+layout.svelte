@@ -15,5 +15,5 @@
         <slot />
     </div>
     <!-- Overlay -->
-    <div class="bg-gradient-to-t md:bg-gradient-to-r from-stone-950 to-stone-950/0 to-40% md:to-30% h-screen w-screen absolute top-0"></div>
+    <div class="fixed bg-gradient-to-t md:bg-gradient-to-r from-stone-950 to-stone-950/0 to-40% md:to-30% h-screen w-screen top-0"></div>
 </div>
