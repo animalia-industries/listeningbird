@@ -10,6 +10,7 @@
 
     setTimeout(() => {
         loading = false
+        console.log(currentData)
     }, 2000)
 
 
@@ -24,7 +25,7 @@
             translate-y-2/3
             md:translate-y-0
         ">
-    <CD  class="md:w-5/12" artworkURL={loading ? '/images/logo/OUI-cover.webp' : 'https://store.twentyonepilots.com/cdn/shop/files/TOP_CL5_Cover_mailer_1.jpg?v=1709152879'} />
+    <CD class="md:w-5/12" artworkURL={loading ? '/images/logo/OUI-cover.webp' : 'https://store.twentyonepilots.com/cdn/shop/files/TOP_CL5_Cover_mailer_1.jpg?v=1709152879'} />
 </div>
 {#if loading}
     <div class="flex items-center justify-center grow">
@@ -38,7 +39,7 @@
 
         <div class="flex flex-col gap-y-2 font-koulen mb-4 z-50 w-full">
             <h1 class="text-4xl md:text-6xl text-white line-clamp-4">{currentData.name}</h1>
-            <h2 class="text-2xl md:text-4xl text-white mb-4 border-b pb-3">Twenty One Pilots</h2>
+            <h2 class="text-2xl md:text-4xl text-white mb-4 border-b pb-3">{currentData.album ?? currentData.artists[0].name}</h2>
             <div class="flex flex-col gap-y-2">
                 <!-- music links -->
                 <div class="space-y-3">

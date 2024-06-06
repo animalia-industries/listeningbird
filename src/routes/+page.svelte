@@ -2,9 +2,6 @@
     import CD from "$lib/components/CD.svelte";
 </script>
 
-<!-- This will be the search page -->
-
-
 <div class="grow flex flex-col-reverse justify-between md:flex-row gap-x-2">
     <div class="md:my-auto">
         <CD class="translate-y-1/3 md:translate-y-0 md:w-3/4" isWrapped artworkURL="/images/logo/OUI-cover.webp"  />

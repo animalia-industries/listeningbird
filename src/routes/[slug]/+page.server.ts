@@ -1,5 +1,5 @@
 import type { PageServerLoad } from '@sveltejs/kit';
-import { dynamoDbClient } from "$lib/aws.server";
+import { dynamoDbClient } from "$lib/server/aws.server";
 import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
 
 
