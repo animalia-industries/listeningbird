@@ -10,7 +10,7 @@ export const POST: RequestHandler  = async ({ request }) => {
 
 	// Get from Spotify
 	const spotifyResponse = await spotifyClient[data.type+'s'].get(data.id);
-
+	console.log(spotifyResponse);
 	//  Get from Deezer
 	const deezerResponse = await searchOnDeezer(spotifyResponse.name, spotifyResponse.type);
 
@@ -19,6 +19,8 @@ export const POST: RequestHandler  = async ({ request }) => {
 		id: crypto.randomUUID(),
 		name: spotifyResponse.name,
 		sourceUrl: spotifyResponse.href,
+		type: spotifyResponse.type,
+		images: spotifyResponse.album?.images ?? spotifyResponse.images,
 		// createdAt: new Date(),
 	};
 
