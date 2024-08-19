@@ -1,38 +1,45 @@
-# create-svelte
+<p align="center">
+  <img width="20%" align="center" src="https://github.com/user-attachments/assets/5ff24329-894c-4fa5-b600-4d54bc7a2444" />
+</p>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-## Creating a project
+# ListeningBird
 
-If you're seeing this, you've probably already done this step. Congrats!
+One link to share a music for most common plateforms.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Tech Stack
 
-```bash
-npm run dev
+**Client:** Svelte, TailwindCSS
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+**Server:** Node, Sveltekit, Docker, MySQL
 
-## Building
 
-To create a production version of your app:
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run build
+  git clone https://github.com/animalia-industries/listeningbird.git
 ```
 
-You can preview the production build with `npm run preview`.
+Go to the project directory
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```bash
+  cd listeningbird
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
