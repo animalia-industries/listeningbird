@@ -15,6 +15,12 @@ One link to share a music for most common plateforms.
 - [ ] Soundcloud
 
  _Feel free to open an issue to request another platform_ 🙂
+
+**Features**:
+- [x] Share from one link a music available for all music plateform available
+- [ ] View your statistic from one plateform
+
+
 ## Tech Stack
 
 **Client:** Svelte, TailwindCSS
