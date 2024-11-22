@@ -5,11 +5,11 @@ import { dynamoDbClient } from '$lib/server/aws.server';
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { searchOnDeezer } from '$lib/server/deezer.server';
 
-export const POST: RequestHandler  = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.json()
 
 	// Get from Spotify
-	const spotifyResponse = await spotifyClient[data.type+'s'].get(data.id);
+	const spotifyResponse = await spotifyClient[data.type + 's'].get(data.id);
 
 	//  Get from Deezer
 	const deezerResponse = await searchOnDeezer(spotifyResponse.name, spotifyResponse.type);
@@ -39,10 +39,10 @@ export const POST: RequestHandler  = async ({ request }) => {
 			break;
 		case 'album':
 			link.artists = spotifyResponse.artists,
-			link.spotify = {
-				id: spotifyResponse.id,
-				url: spotifyResponse.external_urls.spotify
-			};
+				link.spotify = {
+					id: spotifyResponse.id,
+					url: spotifyResponse.external_urls.spotify
+				};
 			if (deezerResponse.total > 1) {
 				link.deezer = {
 					id: deezerResponse.data[0].id,
@@ -52,7 +52,7 @@ export const POST: RequestHandler  = async ({ request }) => {
 			break;
 		case 'track':
 			link.artists = spotifyResponse.artists,
-			link.album = spotifyResponse.album.name;
+				link.album = spotifyResponse.album.name;
 			link.spotify = {
 				id: spotifyResponse.id,
 				url: spotifyResponse.external_urls.spotify
@@ -69,10 +69,10 @@ export const POST: RequestHandler  = async ({ request }) => {
 	// // Save to DynamoDB
 	const ddbDocClient = DynamoDBDocumentClient.from(dynamoDbClient);
 	await ddbDocClient.send(
-	  new PutCommand({
-	    TableName: "musiclinks",
-	    Item: link,
-	  })
+		new PutCommand({
+			TableName: "musiclinks",
+			Item: link,
+		})
 	);
 
 	return json({
