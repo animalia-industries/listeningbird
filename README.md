@@ -10,6 +10,7 @@ Listeningbird is a little platform to share a music link available for all plate
 - [x] Spotify
 - [x] Deezer
 - [ ] Amazon Music
+- [ ] Youtube Music
 - [ ] Napster
 - [ ] Soundcloud
 
