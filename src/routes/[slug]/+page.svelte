@@ -2,7 +2,7 @@
 	import CD from '$lib/components/CD.svelte';
 
 	export let data;
-	const currentData = data.data.Item;
+	const currentData = data.data;
 
 	let loading: boolean = true;
 
@@ -15,49 +15,49 @@
 <!-- This will be the single page -->
 <div
 	class="absolute
-            bottom-8
-            -left-1/4 -right-1/4
+            -left-1/4
+            -right-1/4 bottom-8
 
-            md:top-1/4
             translate-y-2/3
+            md:top-1/4
             md:translate-y-0
         "
 >
 	<CD
 		class="md:w-5/12"
-		artworkURL={loading ? '/images/logo/OUI-cover.webp' : currentData.images[0].url}
+		artworkURL={loading ? '/images/logo/OUI-cover.webp' : JSON.parse(currentData.images)[0].url}
 	/>
 </div>
 {#if loading}
-	<div class="flex items-center justify-center grow">
-		<h1 class="text-white text-4xl text-center font-koulen font-bold animate-pulse">
+	<div class="flex grow items-center justify-center">
+		<h1 class="animate-pulse text-center font-koulen text-4xl font-bold text-white">
 			Creating page...
 		</h1>
 	</div>
 {:else}
-	<div class="grow flex mt-12 md:self-end items-start justify-center md:w-1/2">
-		<div class="flex flex-col gap-y-2 font-koulen mb-4 z-50 w-full">
-			<h1 class="text-4xl md:text-6xl text-white line-clamp-4">{currentData.name}</h1>
+	<div class="mt-12 flex grow items-start justify-center md:w-1/2 md:self-end">
+		<div class="z-50 mb-4 flex w-full flex-col gap-y-2 font-koulen">
+			<h1 class="line-clamp-4 text-4xl text-white md:text-6xl">{currentData.name}</h1>
 			<!-- track, album or artist -->
-			{#if currentData.type !== 'artist'}
-				<h2 class="text-2xl md:text-4xl text-white">
+			<!-- {#if currentData.type !== 'artist'}
+				<h2 class="text-2xl text-white md:text-4xl">
 					{currentData.album ?? currentData.artists[0].name}
 				</h2>
 			{/if}
 			{#if currentData.type === 'track'}
-				<small class="text-white font-koulen"
+				<small class="font-koulen text-white"
 					>{currentData.artists.map((artist) => artist.name).join(', ')}</small
 				>
-			{/if}
-			<div class="border-b w-full mb-4"></div>
+			{/if} -->
+			<div class="mb-4 w-full border-b"></div>
 			<div class="flex flex-col gap-y-2">
 				<!-- music links -->
 				<div class="space-y-3">
 					{#if currentData.spotify}
 						<a
-							href={currentData.spotify.url}
+							href={JSON.parse(currentData.spotify).url}
 							target="_blank"
-							class="flex justify-between items-center bg-white rounded-full px-4 py-2 font-bold gap-x-4 hover:scale-105 transition-all"
+							class="flex items-center justify-between gap-x-4 rounded-full bg-white px-4 py-2 font-bold transition-all hover:scale-105"
 						>
 							<svg
 								width="32"
@@ -74,7 +74,7 @@
 									fill="currentColor"
 								/>
 							</svg>
-							<span class="text-xl grow">SPOTIFY</span>
+							<span class="grow text-xl">SPOTIFY</span>
 							<!-- carret left -->
 							<svg
 								width="25"
@@ -93,11 +93,11 @@
 
 					{#if currentData.deezer}
 						<a
-							href={currentData.deezer?.url}
+							href={JSON.parse(currentData.deezer).url}
 							target="_blank"
-							class="flex justify-between items-center bg-white rounded-full px-4 py-2 font-bold gap-x-4 hover:scale-105 transition-all"
+							class="flex items-center justify-between gap-x-4 rounded-full bg-white px-4 py-2 font-bold transition-all hover:scale-105"
 						>
-							<span class="text-xl grow">Deezer</span>
+							<span class="grow text-xl">Deezer</span>
 							<!-- carret left -->
 							<svg
 								width="25"
@@ -115,9 +115,9 @@
 					{/if}
 
 					<p
-						class="cursor-not-allowed flex justify-between items-center bg-neutral-300 rounded-full px-4 py-2 font-bold gap-x-4"
+						class="flex cursor-not-allowed items-center justify-between gap-x-4 rounded-full bg-neutral-300 px-4 py-2 font-bold"
 					>
-						<span class="text-xl grow">Amazon Music</span>
+						<span class="grow text-xl">Amazon Music</span>
 						<!-- carret left -->
 						<svg
 							width="25"
@@ -134,7 +134,7 @@
 					</p>
 
 					<p
-						class="cursor-not-allowed flex justify-between items-center bg-neutral-300 rounded-full px-4 py-2 font-bold gap-x-4"
+						class="flex cursor-not-allowed items-center justify-between gap-x-4 rounded-full bg-neutral-300 px-4 py-2 font-bold"
 					>
 						<svg
 							width="25"
@@ -149,7 +149,7 @@
 							/>
 						</svg>
 
-						<span class="text-xl grow">Apple Music</span>
+						<span class="grow text-xl">Apple Music</span>
 						<!-- carret left -->
 						<svg
 							width="25"
@@ -166,7 +166,7 @@
 					</p>
 
 					<p
-						class="cursor-not-allowed flex justify-between items-center bg-neutral-300 rounded-full px-4 py-2 font-bold gap-x-4"
+						class="flex cursor-not-allowed items-center justify-between gap-x-4 rounded-full bg-neutral-300 px-4 py-2 font-bold"
 					>
 						<svg
 							width="32"
@@ -240,7 +240,7 @@
 							</defs>
 						</svg>
 
-						<span class="text-xl grow">Soundcloud</span>
+						<span class="grow text-xl">Soundcloud</span>
 						<!-- carret left -->
 						<svg
 							width="25"
@@ -257,7 +257,7 @@
 					</p>
 
 					<p
-						class="cursor-not-allowed flex justify-between items-center bg-neutral-300 rounded-full px-4 py-2 font-bold gap-x-4"
+						class="flex cursor-not-allowed items-center justify-between gap-x-4 rounded-full bg-neutral-300 px-4 py-2 font-bold"
 					>
 						<svg
 							width="32"
@@ -280,7 +280,7 @@
 							/>
 						</svg>
 
-						<span class="text-xl grow">Youtube music</span>
+						<span class="grow text-xl">Youtube music</span>
 						<!-- carret left -->
 						<svg
 							width="25"

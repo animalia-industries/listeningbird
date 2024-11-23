@@ -17,11 +17,11 @@
           ];
 
           shellHook = ''
-            # Check if database exists
-            if [ ! -f /database/listeningbird.db ]; then
-              mkdir -p database
-              touch database/listeningbird.db
-            fi
+            # # Check if database exists
+            # if [ ! -f /database/listeningbird.db ]; then
+            #   mkdir -p database
+            #   touch database/listeningbird.db
+            # fi
 
             # Install dependencies
             npm install

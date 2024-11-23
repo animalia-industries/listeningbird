@@ -10,6 +10,6 @@ export const actions = {
 		});
 		response = await response.json();
 
-		redirect(302, ('/' + response.data.id))
-	},
+		redirect(302, '/' + response.data.id);
+	}
 } satisfies Actions;
