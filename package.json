@@ -16,9 +16,9 @@
 	},
 	"lint-staged": {
 		"*.{js,ts,svelte}": [
-			"prettier --write .",
-			"prettier --check .",
-			"eslint ."
+			"prettier --write",
+			"prettier --check",
+			"eslint"
 		]
 	},
 	"devDependencies": {
