@@ -1,17 +1,15 @@
-import type { PageServerLoad } from '@sveltejs/kit';
-import { dynamoDbClient } from "$lib/server/aws.server";
-import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import type { ServerLoad } from '@sveltejs/kit';
+import { db } from "$lib/server/db.server";
 
-
-export const load: PageServerLoad = async ({ params }) => {
-    return {
-        data: await DynamoDBDocument.from(dynamoDbClient).get(
-        {
-                TableName: 'musiclinks',
-                Key: {
-                    id: params.slug
-                }
-            }
-        ),
-    };
+export const load: ServerLoad = async ({ params }) => {
+	const id = Number(params.slug);
+	const data = await db.links.findUnique({ 
+		where: { 
+			id: id 
+		}
+	});
+	
+	return {
+		data
+	};
 };
