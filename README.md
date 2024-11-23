@@ -6,7 +6,8 @@
 
 Listeningbird is a little platform to share a music link available for all plateform (_below_). No account is needed to create and share a link.
 
-**Plateform available at this time**: 
+**Plateform available at this time**:
+
 - [x] Spotify
 - [x] Deezer
 - [ ] Amazon Music
@@ -14,33 +15,36 @@ Listeningbird is a little platform to share a music link available for all plate
 - [ ] Napster
 - [ ] Soundcloud
 
- _Feel free to open an issue to request another platform_ 🙂
+_Feel free to open an issue to request another platform_ 🙂
 
 **Features**:
+
 - Share from one link a music available for all music plateform available
 - **TODO**: View your listening stats from your connected platforms
 - ... propose your idea with a [feature request]()
 
-
 ## Installation
 
 Clone the project
+
 ```bash
 git clone https://github.com/animalia-industries/listeningbird.git
 ```
 
 Go to the project directory
+
 ```bash
 cd listeningbird
 ```
 
 Install dependencies
+
 ```bash
 npm install
 ```
 
 Start the server
+
 ```bash
 npm run dev
 ```
-
