@@ -28,7 +28,7 @@ export const GET: RequestHandler = async ({ url }) => {
 					sourceUrl: album.href,
 					totalTracks: album.total_tracks,
 					releaseDate: album.release_date,
-					images: album.images
+					image: album.images[0]?.url
 				};
 			}),
 			artists: data.artists.items.map((artist) => {
@@ -38,7 +38,7 @@ export const GET: RequestHandler = async ({ url }) => {
 					type: artist.type,
 					genres: artist.genres,
 					sourceUrl: artist.href,
-					images: artist.images
+					image: artist.images[0]?.url
 				};
 			}),
 			tracks: data.tracks.items.map((track) => {
@@ -48,7 +48,7 @@ export const GET: RequestHandler = async ({ url }) => {
 					type: track.type,
 					artists: track.artists.map((artist) => artist.name),
 					album: track.album.name,
-					images: track.album.images,
+					image: track.album.images[0]?.url,
 					sourceUrl: track.href,
 					explicit: track.explicit
 				};

@@ -1,15 +1,46 @@
 <script lang="ts">
 	import CD from '$lib/components/CD.svelte';
 
+	type SearchResults = {
+		tracks: {
+			id: number;
+			name: string;
+			type: string;
+			artists: string[];
+			album: string;
+			image: string;
+			sourceUrl: URL;
+			explicit: boolean;
+		}[];
+		albums: {
+			id: number;
+			name: string;
+			type: string;
+			artists: string[];
+			sourceUrl: URL;
+			totalTracks: number;
+			releaseDate: string;
+			image: string;
+		}[];
+		artists: {
+			id: number;
+			name: string;
+			type: string;
+			genres: string[];
+			sourceUrl: URL;
+			image: string;
+		}[];
+	};
+
 	let loading: boolean;
+	let idInputValue: number;
 	let typeInputValue: string;
-	let idInputValue: string;
-	let searchResults: any = [];
+	let searchResults: SearchResults | undefined = undefined;
 	$: searchQuery = '';
 
 	const searchAPI = async (query: string) => {
-		searchResults = [];
-		if (query.length < 3) return;
+		searchResults = undefined;
+		if (query.length <= 3) return;
 		try {
 			loading = true;
 			const response = (await fetch(`/api/search?query=${query}`)).json();
@@ -47,7 +78,7 @@
 			</p>
 			<input
 				bind:value={searchQuery}
-				on:input={(e) => searchAPI(searchQuery)}
+				on:input={() => searchAPI(searchQuery)}
 				type="text"
 				class="w-full rounded-full bg-neutral-800 px-4 py-2 font-koulen text-white"
 				placeholder="Search for an album, artist or track"
@@ -76,25 +107,25 @@
 	{#if searchResults?.tracks}
 		<p class="ml-2 font-koulen text-xl text-white">Tracks</p>
 		<div class="mb-3 divide-y-2 divide-neutral-800 overflow-hidden rounded-md">
-			{#each searchResults?.tracks as track}
+			{#each searchResults.tracks as track}
 				<button
 					type="submit"
 					class="flex w-full items-center justify-between gap-x-4 bg-neutral-800/50 px-4 py-2"
 					on:click={() => {
-						typeInputValue = track?.type;
-						idInputValue = track?.id;
+						typeInputValue = track.type;
+						idInputValue = track.id;
 					}}
 				>
-					<CD class="w-16 min-w-16" artworkURL={track?.images[0]?.url} />
+					<CD isWrapped={false} class="w-16 min-w-16" artworkURL={track.image} />
 					<div class="flex grow flex-col gap-y-1 text-start">
-						<span class="line-clamp-1 font-koulen text-xl leading-none text-white"
-							>{track?.name}</span
-						>
-						<span class="line-clamp-1 font-koulen text-lg leading-none text-neutral-500"
-							>{track?.album} - {track?.artists.join(', ')}</span
-						>
+						<span class="line-clamp-1 font-koulen text-xl leading-none text-white">
+							{track.name}
+						</span>
+						<span class="line-clamp-1 font-koulen text-lg leading-none text-neutral-500">
+							{track.album} - {track.artists.join(', ')}
+						</span>
 					</div>
-					{#if track?.explicit}
+					{#if track.explicit}
 						<span class="rounded-full bg-red-500 px-2 py-1 text-xs text-white">Explicit</span>
 					{/if}
 					<svg
@@ -132,24 +163,25 @@
 		<!-- Artist -->
 		<p class="ml-2 font-koulen text-xl text-white">Albums</p>
 		<div class="mb-3 divide-y-2 divide-neutral-800 overflow-hidden rounded-md">
-			{#each searchResults?.albums as album}
+			{#each searchResults.albums as album}
 				{#if album.type === 'album'}
 					<button
 						type="submit"
 						class="flex w-full items-center justify-between gap-x-4 bg-neutral-800/50 px-4 py-2"
 						on:click={() => {
-							typeInputValue = album?.type;
-							idInputValue = album?.id;
+							typeInputValue = album.type;
+							idInputValue = album.id;
 						}}
 					>
-						<CD class="w-16 min-w-16" isWrapped artworkURL={album?.images[0].url} />
+						<CD class="w-16 min-w-16" isWrapped artworkURL={album.image} />
 						<div class="flex grow flex-col gap-y-1 text-start">
-							<span class="line-clamp-1 font-koulen text-xl leading-none text-white"
-								>{album?.name}</span
-							>
-							<span class="line-clamp-1 font-koulen text-lg leading-none text-neutral-500"
-								>{album?.artists.join(', ')}</span
-							>
+							<span class="line-clamp-1 font-koulen text-xl leading-none text-white">
+								{album.name}
+							</span>
+
+							<span class="line-clamp-1 font-koulen text-lg leading-none text-neutral-500">
+								{album.artists.join(', ')}
+							</span>
 						</div>
 						<svg
 							width="25"
@@ -186,20 +218,20 @@
 		<p class="ml-2 font-koulen text-xl text-white">Artists</p>
 
 		<div class="mb-3 divide-y-2 divide-neutral-800 overflow-hidden rounded-md">
-			{#each searchResults?.artists as artist}
+			{#each searchResults.artists as artist}
 				<button
 					type="submit"
 					class="flex w-full items-center justify-between gap-x-4 bg-neutral-800/50 px-4 py-2"
 					on:click={() => {
-						typeInputValue = artist?.type;
-						idInputValue = artist?.id;
+						typeInputValue = artist.type;
+						idInputValue = artist.id;
 					}}
 				>
-					<CD class="w-16 min-w-16" artworkURL={artist?.images[0]?.url} />
+					<CD isWrapped={false} class="w-16 min-w-16" artworkURL={artist.image} />
 					<div class="flex grow flex-col gap-y-1">
-						<span class="line-clamp-1 text-start font-koulen text-xl leading-none text-white"
-							>{artist?.name}</span
-						>
+						<span class="line-clamp-1 text-start font-koulen text-xl leading-none text-white">
+							{artist.name}
+						</span>
 					</div>
 					<svg
 						width="25"
